@@ -707,10 +707,10 @@ static/
 3. Отредактируйте файл `common.blocks/root/root.bemtree.js`.
 
    ```diff
-         ...
-   +     favicon: '/images/favicon.ico'
-   -     favicon: '/favicon.ico'
-         ...
+        ...
+   +   favicon: '/images/favicon.ico'
+   -   favicon: '/favicon.ico'
+       ...
    ```
 
    [Полный код common.blocks/root/root.bemtree.js](https://gist.github.com/godfreyd/fba71361207a95134982579c13b0050d).

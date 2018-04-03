@@ -115,7 +115,7 @@
 
 8. Откройте файл `server/index.js` и внесите следующие изменения (см. комментарии) в код начинающегося строкой `app.get('/', function(req, res)`:
 
-    ```js
+    ```diff index.js
     /**
      * Функция обрабатывает все GET-запросы с главной страницы приложения
      * @function
@@ -123,8 +123,8 @@
      * @param {object} res - Ответ.
      */
     app.get('/', function(req, res) {
-        var hello = 'Hello';                  // Инициализируем переменную `hello`
-        var world = 'World';                  // Инициализируем переменную `world`
+        + var hello = 'Hello';                  // Инициализируем переменную `hello`
+        + var world = 'World';                  // Инициализируем переменную `world`
         render(req, res, {
             view: 'page-index',
             title: 'Main page',

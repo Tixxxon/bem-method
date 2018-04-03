@@ -106,7 +106,7 @@
     footer content
     ```
 
-8. Откройте файл **server/index.js** и внесите следующие изменения в код, начинающегося строкой `app.get('/', function(req, res)`:
+8. Откройте файл `server/index.js` и внесите следующие изменения в код, начинающегося строкой `app.get('/', function(req, res)`:
 
     ```diff
     // ...
@@ -130,7 +130,7 @@
     // ...
     ```
 
-9. Откройте файл **common.blocks/page-index/page-index.bemtree.js** и замените его содержимое на следующее:
+9. Откройте файл `common.blocks/page-index/page-index.bemtree.js` и замените его содержимое на следующее:
 
     ```js
     block('page-index').content()(function() {

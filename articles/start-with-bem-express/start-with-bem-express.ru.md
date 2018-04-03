@@ -712,28 +712,13 @@ static/
    +    routes.js            # Модуль маршрутизации запросов
    ```
 
-* Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл `app.js`.
+3. Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл **app.js**.
 
-* Добавьте [следующий код](https://gist.github.com/godfreyd/f6de1c33a83dda708a0e3ba9312f0c78) в файл `routes.js`.
+4. Добавьте [следующий код](https://gist.github.com/godfreyd/f6de1c33a83dda708a0e3ba9312f0c78) в файл **routes.js**.
 
-* Измените расширение файла `config`:
+5. Измените расширение файла **config.js** —> **config.json**.
 
-  `config.js` —> `config.json`
-
-* Отредактируйте файл `config.json`.
-
-  Измените:
-
-  ```js
-  module.exports = {
-      staticFolder: 'static',
-      defaultPort: 3000,
-      cacheTTL: 30000,
-      sessionSecret: 'REPLACE_ME_WITH_RANDOM_STRING'
-  };
-  ```
-
-  На:
+6. Замените содержимое файла **config.json** на следующее:
 
   ```json
   {
@@ -744,7 +729,7 @@ static/
   }
   ```
 
-* Измените весь текущий контент файла `index.js` на [следующий](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
+7. Замените содержимое файла **index.js** на [следующее](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
 
   > **Примечание.** В `index.js` остается только функциональность, отвечающая за запуск приложения и прослушивание запросов на порте.
 

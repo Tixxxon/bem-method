@@ -685,9 +685,9 @@ static/
 
 ```diff
 bem-project/
-    static/               # Корневая директория для раздачи статических файлов
-    +   images/
-    +       favicon.ico
+    static/
++       images/
++          favicon.ico
 ```
 
 

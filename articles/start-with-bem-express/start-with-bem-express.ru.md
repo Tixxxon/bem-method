@@ -720,14 +720,14 @@ static/
 
 6. Замените содержимое файла **config.json** на следующее:
 
-  ```json
-  {
-    "staticFolder": "static",
-    "defaultPort": 3000,
-    "cacheTTL": 30000,
-    "sessionSecret": "REPLACE_ME_WITH_RANDOM_STRING"
-  }
-  ```
+   ```json
+   {
+       "staticFolder": "static",
+       "defaultPort": 3000,
+       "cacheTTL": 30000,
+       "sessionSecret": "REPLACE_ME_WITH_RANDOM_STRING"
+   }
+   ```
 
 7. Замените содержимое файла **index.js** на [следующее](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
 

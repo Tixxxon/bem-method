@@ -687,9 +687,9 @@ static/
 
    ```diff
    server/
-   +    controllers/
-   +    helpers/
-   +    middleware/
+   +    controllers/         # Контроллеры
+   +    helpers/             # Хелперы
+   +    middleware/          # Модули промежуточного звена
         config.js
         index.js
         rebuild.js
@@ -709,7 +709,7 @@ static/
         index.js
         rebuild.js
         render.js
-   +    routes.js            # Модуль маршрутизации веб-запросов
+   +    routes.js            # Модуль маршрутизации запросов
    ```
 
 * Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл `app.js`.

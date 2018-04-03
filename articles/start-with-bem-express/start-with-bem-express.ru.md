@@ -717,7 +717,7 @@ static/
         ...
    ```
 
-   [Полный код common.blocks/root/root.bemtree.js](https://gist.github.com/godfreyd/fba71361207a95134982579c13b0050d).
+   [Полный код root.bemtree.js](https://gist.github.com/godfreyd/fba71361207a95134982579c13b0050d).
 
 **Директория `server`**
 

@@ -689,8 +689,8 @@ static/
         static/
    +        images/
             favicon.ico
-            index.min.js
             index.min.css
+            index.min.js
         ...
    ```
 
@@ -703,12 +703,12 @@ static/
             images/
    +            favicon.ico
    -        favicon.ico
-            index.min.js
             index.min.css
+            index.min.js
         ...
    ```
 
-3. Отредактируйте файл `common.blocks/root/root.bemtree.js`.
+3. Отредактируйте файл **common.blocks/root/root.bemtree.js**.
 
    ```diff
         ...

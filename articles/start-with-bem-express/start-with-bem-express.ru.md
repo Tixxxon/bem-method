@@ -670,94 +670,44 @@ static/
 
 > Подробнее о [символических ссылках](https://ru.wikipedia.org/wiki/Символическая_ссылка).
 
-Прежде чем начать писать код, необходимо немного изменить структуру взятого за основу приложения Hello, World.
+Прежде чем начать писать код, необходимо изменить структуру взятого за основу приложения Hello, World.
 
 Изменения для:
 
-* [статических файлов](#Изменения-для-статических-файлов);
 * [серверного кода](#Изменения-для-серверного-кода).
 
-#### Изменения для статических файлов
-
-![static](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__static-changes.svg)
-
-1. Создайте поддиректорию **images** в директории **static**.
-
-   ```diff
-   bem-project/
-        ...
-        static/
-   +        images/
-            favicon.ico
-            index.min.css
-            index.min.js
-        ...
-   ```
-
-2. Перенесите фавиконку в поддиректорию **images**.
-
-   ```diff
-   bem-project/
-        ...
-        static/
-            images/
-   +            favicon.ico
-   -        favicon.ico
-            index.min.css
-            index.min.js
-        ...
-   ```
-
-3. Отредактируйте файл **common.blocks/root/root.bemtree.js**.
-
-   ```diff
-        ...
-   +    favicon: '/images/favicon.ico'
-   -    favicon: '/favicon.ico'
-        ...
-   ```
-
-   [Полный код root.bemtree.js](https://gist.github.com/godfreyd/fba71361207a95134982579c13b0050d).
-
-**Директория `server`**
-
-* Отредактируйте файл `index.js`.
-
-  Измените:
-
-  ```text
-  .use(favicon(path.join(staticFolder, 'favicon.ico')))
-  ```
-
-  На:
-
-  ```text
-  .use(favicon(path.join(staticFolder, '/images/favicon.ico')))
-  ```
-
-  [Полный код index.js](https://gist.github.com/godfreyd/fdc6e2d7f1f42deac4dcfc0dde36bd11).
-
-В результате выполненных действий файловая структура директории `static` должна иметь следующий вид:
-
-```files
-static/
-    images/
-        favicon.ico
-index.min.css
-index.min.js
-```
 
 #### Изменения для серверного кода
 
 ![server-changes](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__server-changes.svg)
 
-**Директория `server`**
 
-* Создайте поддиректории:
 
-  * `controllers` — контроллеры;
-  * `helpers` — хелперы;
-  * `middleware` — модули промежуточного звена.
+1. В директории **server** создайте поддиректории для:
+   * контроллеров;
+   * хелперов;
+   * модулей промежуточного звена.
+
+   ```diff
+   server/
+   +    controllers/
+   +    helpers/
+   +    middleware/
+        config.js
+        index.js
+        rebuild.js
+        render.js
+   ```
+
+
+
+
+
+
+
+
+
+
 
 * Создайте пустые `JS`-файлы для будущих модулей:
 

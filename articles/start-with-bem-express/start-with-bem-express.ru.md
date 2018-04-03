@@ -113,18 +113,13 @@
     > 2. Установите опцию **Частные сети**.
     > 3. Разрешите доступ.
 
-8. Откройте файл `server/index.js` и внесите следующие изменения (см. комментарии) в код начинающегося строкой `app.get('/', function(req, res)`:
+8. Откройте файл `server/index.js` и внесите следующие изменения в код начинающегося строкой `app.get('/', function(req, res)`:
 
     ```diff
-    /**
-     * Функция обрабатывает все GET-запросы с главной страницы приложения
-     * @function
-     * @param {object} req - Запрос.
-     * @param {object} res - Ответ.
-     */
+    // ...
     app.get('/', function(req, res) {
-    +   var hello = 'Hello';                  // Инициализируем переменную `hello`
-    +   var world = 'World';                  // Инициализируем переменную `world`
+    +   var hello = 'Hello';
+    +   var world = 'World';
         render(req, res, {
             view: 'page-index',
             title: 'Main page',
@@ -135,10 +130,11 @@
                     siteName: 'Site name'
                 }
             },
-            hello: hello,                     // Передаем переменную `hello` в `this.data.hello`
-            world: world                      // Передаем переменную `world` в `this.data.world`
+        +   hello: hello,
+        +   world: world
         })
     });
+    // ...
     ```
 
 9. Откройте файл `common.blocks/page-index/page-index.bemtree.js` и замените его содержимое на следующее:

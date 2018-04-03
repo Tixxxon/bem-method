@@ -685,32 +685,36 @@ static/
 
    ```diff
    bem-project/
-       ...
-       static/
-   +       images/
-   +          favicon.ico
-       ...
+        ...
+        static/
+   +        images/
+            favicon.ico
+            index.min.js
+            index.min.css
+        ...
    ```
 
 2. Перенесите фавиконку в поддиректорию **images**.
 
    ```diff
    bem-project/
-       ...
-       static/
-           images/
-   +          favicon.ico
-   -       favicon.ico
-       ...
+        ...
+        static/
+            images/
+   +            favicon.ico
+   -        favicon.ico
+            index.min.js
+            index.min.css
+        ...
    ```
 
 3. Отредактируйте файл `common.blocks/root/root.bemtree.js`.
 
    ```diff
         ...
-   +   favicon: '/images/favicon.ico'
-   -   favicon: '/favicon.ico'
-       ...
+   +    favicon: '/images/favicon.ico'
+   -    favicon: '/favicon.ico'
+        ...
    ```
 
    [Полный код common.blocks/root/root.bemtree.js](https://gist.github.com/godfreyd/fba71361207a95134982579c13b0050d).

@@ -160,18 +160,7 @@
 
 Цель разработки данного приложения — показать взаимосвязь:
 * [технологий БЭМ](#Используемые-технологии);
-* данных и интерфейса;
-
-При разработке проекта используются:
-
-* фреймворк [i-bem.js](https://ru.bem.info/platform/i-bem/);
-* шаблонизатор [bem-xjst](https://ru.bem.info/platform/bem-xjst/);
-* технологию для описания зависимостей [DEPS](https://ru.bem.info/platform/deps/);
-* [Express.js](http://expressjs.com);
-* [YouTube Data API](https://developers.google.com/youtube/v3/docs/search/list);
-* [Twitter Search API](https://dev.twitter.com/rest/public/search).
-
-> **Примечание.** Для разработки приложения необходимо установить [следующие модули Node](#Используемые-модули-node).
+* данных и интерфейса.
 
 ### Схема работы приложения
 

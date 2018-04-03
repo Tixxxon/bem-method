@@ -681,6 +681,16 @@ static/
 
 ![static](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__static-changes.svg)
 
+
+
+```diff
+bem-project/
+    static/               # Корневая директория для раздачи статических файлов
+    +   images/
+    +       favicon.ico
+```
+
+
 **Директория `static`**
 
 * Создайте поддиректорию `images`.

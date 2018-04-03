@@ -681,7 +681,7 @@ static/
 
 ![static](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__static-changes.svg)
 
-1. Создайте поддиректорию **images**.
+1. Создайте поддиректорию **images** в директории **static**.
 
    ```diff
    bem-project/
@@ -689,6 +689,7 @@ static/
        static/
    +       images/
    +          favicon.ico
+       ...
    ```
 
 2. Перенесите фавиконку в поддиректорию **images**.
@@ -700,6 +701,7 @@ static/
            images/
    +          favicon.ico
    -       favicon.ico
+       ...
    ```
 
 **Директория `static`**

@@ -1,14 +1,14 @@
 # Создаем динамический БЭМ-проект
 
 * [Введение](#Введение)
-* [Используемые обозначения](#Используемые-обозначения)
-* [Используемые технологии](#Используемые-технологии)
 * [Приложение Hello, World](#Приложение-hello-world)
   * [Шаблонный репозиторий](#Шаблонный-репозиторий)
   * [Быстрый старт](#Быстрый-старт)
   * [Файловая структура](#Файловая-структура)
 * [Приложение Social Services Search Robot](#Приложение-social-services-search-robot)
   * [Схема работы приложения](#Схема-работы-приложения)
+  * [Используемые обозначения](#Используемые-обозначения)
+  * [Используемые технологии](#Используемые-технологии)
   * [Используемые модули Node](#Используемые-модули-node)
   * [Подготовка структуры проекта](#Подготовка-структуры-проекта)
   * [Получение OAuth-токенов](#Получение-oauth-токенов)
@@ -21,27 +21,19 @@
 
 Многие современные приложения требуют динамических возможностей, таких как обмен данными в режиме реального времени с последующей частичной или полной перезагрузкой текущей страницы.
 
-Цель документа — показать, как разрабатывать динамические проекты по БЭМ, используя [полный стек технологий](#Используемые-технологии).
+Цель документа — показать, как разрабатывать динамические проекты по БЭМ, используя следующие технологии БЭМ:
 
-В документе рассмотрен процесс создания динамического приложения **Social Services Search Robot** (**SSSR**). Оно позволяет искать последние твиты и видео по ключевому слову.
+* BEMDECL.
+* DEPS.
+* BEMTREE.
+* BEMHTML.
+* i-bem.js.
 
-При разработке проекта используется:
-
-* фреймворк [i-bem.js](https://ru.bem.info/platform/i-bem/);
-* шаблонизатор [bem-xjst](https://ru.bem.info/platform/bem-xjst/);
-* технологию для описания зависимостей [DEPS](https://ru.bem.info/platform/deps/);
-* [Express.js](http://expressjs.com);
-* [YouTube Data API](https://developers.google.com/youtube/v3/docs/search/list);
-* [Twitter Search API](https://dev.twitter.com/rest/public/search).
+В документе рассмотрен процесс создания двух динамических приложений:
+* [Hello, World](#Приложение-hello-world) — быстрый старт по созданию динамического приложения.
+* [Social Services Search Robot (SSSR)](#Приложение-social-services-search-robot) — позволяет искать последние твиты и видео по ключевому слову.
 
 После прочтения вы сможете разрабатывать собственные БЭМ-проекты, ориентированные на динамические данные.
-
-Обратите внимание, что для работы с примерами, описанными в документе, необходимо иметь базовые навыки:
-
-* HTML
-* CSS
-* JavaScript
-* БЭМ
 
 > **Важно!** В документе не рассматриваются вопросы верстки и клиентского JS.
 
@@ -55,134 +47,7 @@
 Все примеры программного кода, описанные в документе, проверены в версиях:
 
 * Node.js — 4.7.0.
-* npm — 4.5.0.
-
-> **Примечание.** [npm](https://www.npmjs.com) — менеджер пакетов, входящий в состав Node.js.
-
-## Используемые обозначения
-
-В документе приняты следующие условные обозначения:
-
-* ![folder](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__folder.svg) — директория;
-* ![file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__file.svg) — файл;
-* ![add folder](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__add-folder.svg) — создать директорию;
-* ![add file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__add-file.svg) — создать файл;
-* ![edit file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__edit-file.svg) — отредактировать файл.
-
-## Используемые технологии
-
-Полный стек технологий БЭМ состоит из:
-
-* [BEMDECL](#bemdecl) — технология для описания деклараций в БЭМ.
-* [DEPS](#deps) — технология для описания зависимостей в БЭМ.
-* [BEMTREE](#bemtree) — шаблонизатор преобразующий данные в BEMJSON.
-* [BEMHTML](#bemhtml) — шаблонизатор преобразующий BEMJSON в HTML.
-* [i-bem.js](#i-bemjs) — JavaScript-фреймворк для БЭМ.
-
-> Подробнее о [BEMJSON-формате](https://ru.bem.info/platform/bemjson/) входных данных.
-
-### BEMDECL
-
-Определяет список [БЭМ-сущностей](https://ru.bem.info/methodology/key-concepts/#БЭМ-сущность), используемых на странице.
-
-Такой список в БЭМ называется [декларацией](https://ru.bem.info/methodology/declarations/). Задача декларации — определить, что и в каком порядке подключать в сборку.
-
-Декларации описываются в файлах с расширением `.bemdecl.js`.
-
-Пример декларации из [приложения Hello, World](#Приложение-hello-world):
-
-```js
-// Файл `desktop.bundles/index/index.bemdecl.js`
-exports.blocks = [
-    { name: 'root' }
-];  
-```
-
-Как видно из примера, в файле `index.bemdecl.js` определен только блок `root`.
-
-При использовании технологии [DEPS](#deps), в декларации определяют БЭМ-сущность, с которой будет начинаться [сборка проекта](https://ru.bem.info/methodology/build/).
-
-Блок `root` следует рассматривать как центральную «точку входа» при работе над проектом. Все остальные БЭМ-сущности попадают в сборку по зависимостям.
-
-Пример сборки проекта по зависимостям:
-
-```files
-root(DECL)
-|
-└──> root(DEPS)
-     |
-     └──> page(DEPS)
-          |
-          ├──> header(DEPS)
-          |    |
-          |    └──> ...
-          |
-          ├──> body(DEPS)
-          |    |
-          |    └──> ...
-          |
-          └──> footer(DEPS)
-               |
-               └──> ...
-```
-
-> Подробнее о [технологии BEMDECL](https://ru.bem.info/methodology/declarations/).
-
-### DEPS
-
-Определяет зависимости между БЭМ-сущностями, которые разнесены по файловой структуре проекта и не отражены в [декларации](#bemdecl).
-
-Зависимости описываются в виде JavaScript-объекта в файлах с расширением `.deps.js`.
-
-Пример зависимостей для блока `root` из [приложения Hello, World](#Приложение-hello-world):
-
-```js
-// Файл `common.blocks/root/root.deps.js`
-({
-    shouldDeps: 'page'
-})
-```
-
-> Подробнее о [технологии DEPS](https://ru.bem.info/platform/deps/).
-
-### BEMTREE
-
-Является частью шаблонизатора [bem-xjst](https://ru.bem.info/platform/bem-xjst/) и преобразует данные в BEMJSON.
-
-Шаблоны описываются в BEMJSON-формате в файлах с расширением `.bemtree.js`.
-
-Вход и выход шаблонизатора:
-
-![BEMTREE](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__bemtree.svg)
-
-> Подробнее о [технологии BEMTREE](https://ru.bem.info/platform/bem-xjst/).
-
-### BEMHTML
-
-Является частью шаблонизатора [bem-xjst](https://ru.bem.info/platform/bem-xjst/) и преобразует BEMJSON-описание страницы в HTML.
-
-Шаблоны описываются в файлах с расширением `.bemhtml.js`.
-
-Вход и выход шаблонизатора:
-
-![BEMHTML](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__bemhtml.svg)
-
-> Подробнее о [технологии BEMHTML](https://ru.bem.info/platform/bem-xjst/).
-
-### i-bem.js
-
-Клиентский JavaScript-фреймворк для веб-разработки в рамках БЭМ-методологии.
-
-JavaScript-код описывается в файлах с расширением `.js`.
-
-Позволяет:
-
-* разрабатывать веб-интерфейс в терминах блоков, элементов, модификаторов;
-* описывать логику работы блока в декларативном стиле — как набор состояний;
-* легко интегрировать код JavaScript с BEMHTML-шаблонами и CSS;
-* гибко переопределять поведение библиотечных блоков.
-
-> Подробнее о [технологии i-bem.js](https://ru.bem.info/platform/i-bem/).
+* [npm](https://www.npmjs.com) — 4.5.0.
 
 ## Приложение Hello, World
 
@@ -468,7 +333,7 @@ static/
 
 ![Demo](start-with-bem-express__demo.png)
 
-**SSSR** — это сервис для поиска твитов и видео, отвечающих заданному набору параметров. Параметры поиска передаются в [Twitter Search API](https://dev.twitter.com/rest/public/search) и [YouTube Data API](https://developers.google.com/youtube/v3/docs/search/list) в виде HTTP-запроса методом GET. Программные интерфейсы формируют ответ в виде [JSON-документа](http://www.json.org).
+**SSSR** — это сервис для поиска твитов и видео, отвечающих заданному набору параметров. Параметры поиска передаются в [Twitter Search API](https://dev.twitter.com/rest/public/search) и [YouTube Data API](https://developers.google.com/youtube/v3/docs/search/list) в виде HTTP-запроса методом GET.
 
 Цель разработки данного приложения — показать:
 
@@ -477,7 +342,16 @@ static/
 
 На базе этой инфраструктуры (приложения **SSSR**) можно реализовать множество динамических БЭМ-проектов для решения частных задач.
 
-> **Примечание.** Для разработки приложения необходимо установить [некоторые модули Node](#Используемые-модули-node).
+При разработке проекта используется:
+
+* фреймворк [i-bem.js](https://ru.bem.info/platform/i-bem/);
+* шаблонизатор [bem-xjst](https://ru.bem.info/platform/bem-xjst/);
+* технологию для описания зависимостей [DEPS](https://ru.bem.info/platform/deps/);
+* [Express.js](http://expressjs.com);
+* [YouTube Data API](https://developers.google.com/youtube/v3/docs/search/list);
+* [Twitter Search API](https://dev.twitter.com/rest/public/search).
+
+> **Примечание.** Для разработки приложения необходимо установить [следующие модули Node](#Используемые-модули-node).
 
 ### Схема работы приложения
 
@@ -508,6 +382,129 @@ static/
 Приложение возвращает результат (HTML-страницу) пользователю.
 
 > **Примечание.** Обновлять можно как всю страницу целиком, так и контент нужного блока.
+
+## Используемые обозначения
+
+В документе приняты следующие условные обозначения:
+
+* ![folder](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__folder.svg) — директория;
+* ![file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__file.svg) — файл;
+* ![add folder](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__add-folder.svg) — создать директорию;
+* ![add file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__add-file.svg) — создать файл;
+* ![edit file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__edit-file.svg) — отредактировать файл.
+
+## Используемые технологии
+
+Технологии БЭМ:
+
+* [BEMDECL](#bemdecl) — технология для описания деклараций в БЭМ.
+* [DEPS](#deps) — технология для описания зависимостей в БЭМ.
+* [BEMTREE](#bemtree) — шаблонизатор преобразующий данные в BEMJSON.
+* [BEMHTML](#bemhtml) — шаблонизатор преобразующий BEMJSON в HTML.
+* [i-bem.js](#i-bemjs) — JavaScript-фреймворк для БЭМ.
+
+### BEMDECL
+
+Определяет список [БЭМ-сущностей](https://ru.bem.info/methodology/key-concepts/#БЭМ-сущность), используемых на странице.
+
+Такой список в БЭМ называется [декларацией](https://ru.bem.info/methodology/declarations/). Задача декларации — определить, что и в каком порядке подключать в сборку.
+
+Декларации описываются в файлах с расширением `.bemdecl.js`.
+
+Пример декларации из [приложения Hello, World](#Приложение-hello-world):
+
+```js
+// Файл `desktop.bundles/index/index.bemdecl.js`
+exports.blocks = [
+    { name: 'root' }
+];  
+```
+
+Как видно из примера, в файле `index.bemdecl.js` определен только блок `root`.
+
+При использовании технологии [DEPS](#deps), в декларации определяют БЭМ-сущность, с которой будет начинаться [сборка проекта](https://ru.bem.info/methodology/build/).
+
+Блок `root` следует рассматривать как центральную «точку входа» при работе над проектом. Все остальные БЭМ-сущности попадают в сборку по зависимостям.
+
+Пример сборки проекта по зависимостям:
+
+```files
+root(DECL)
+|
+└──> root(DEPS)
+     |
+     └──> page(DEPS)
+          |
+          ├──> header(DEPS)
+          |    |
+          |    └──> ...
+          |
+          ├──> body(DEPS)
+          |    |
+          |    └──> ...
+          |
+          └──> footer(DEPS)
+               |
+               └──> ...
+```
+
+> Подробнее о [технологии BEMDECL](https://ru.bem.info/methodology/declarations/).
+
+### DEPS
+
+Определяет зависимости между БЭМ-сущностями, которые разнесены по файловой структуре проекта и не отражены в [декларации](#bemdecl).
+
+Зависимости описываются в виде JavaScript-объекта в файлах с расширением `.deps.js`.
+
+Пример зависимостей для блока `root` из [приложения Hello, World](#Приложение-hello-world):
+
+```js
+// Файл `common.blocks/root/root.deps.js`
+({
+    shouldDeps: 'page'
+})
+```
+
+> Подробнее о [технологии DEPS](https://ru.bem.info/platform/deps/).
+
+### BEMTREE
+
+Является частью шаблонизатора [bem-xjst](https://ru.bem.info/platform/bem-xjst/) и преобразует данные в BEMJSON.
+
+Шаблоны описываются в BEMJSON-формате в файлах с расширением `.bemtree.js`.
+
+Вход и выход шаблонизатора:
+
+![BEMTREE](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__bemtree.svg)
+
+> Подробнее о [технологии BEMTREE](https://ru.bem.info/platform/bem-xjst/).
+
+### BEMHTML
+
+Является частью шаблонизатора [bem-xjst](https://ru.bem.info/platform/bem-xjst/) и преобразует BEMJSON-описание страницы в HTML.
+
+Шаблоны описываются в файлах с расширением `.bemhtml.js`.
+
+Вход и выход шаблонизатора:
+
+![BEMHTML](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__bemhtml.svg)
+
+> Подробнее о [технологии BEMHTML](https://ru.bem.info/platform/bem-xjst/).
+
+### i-bem.js
+
+Клиентский JavaScript-фреймворк для веб-разработки в рамках БЭМ-методологии.
+
+JavaScript-код описывается в файлах с расширением `.js`.
+
+Позволяет:
+
+* разрабатывать веб-интерфейс в терминах блоков, элементов, модификаторов;
+* описывать логику работы блока в декларативном стиле — как набор состояний;
+* легко интегрировать код JavaScript с BEMHTML-шаблонами и CSS;
+* гибко переопределять поведение библиотечных блоков.
+
+> Подробнее о [технологии i-bem.js](https://ru.bem.info/platform/i-bem/).
 
 ### Используемые модули Node
 

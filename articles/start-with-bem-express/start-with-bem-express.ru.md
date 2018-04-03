@@ -27,13 +27,13 @@
 * [Hello, World](#Приложение-hello-world) — быстрый старт по созданию динамических приложений.
 * [Social Services Search Robot](#Приложение-social-services-search-robot) — пример создания приложения, работающего с внешними API.
 
-> **Важно!** В документе не рассматриваются вопросы верстки и клиентского JS.
-
 Для работы потребуется установить:
 
 * [Node.js 4+](https://nodejs.org).
 * [Git](https://git-scm.com).
 * [Git Bash](https://git-for-windows.github.io) (пользователям ОС Windows).
+
+> **Важно!** В документе не рассматриваются вопросы верстки и клиентского JS.
 
 ## Приложение Hello, World
 

@@ -25,7 +25,7 @@
 
 В документе рассмотрен процесс создания двух приложений:
 * [Hello, World](#Приложение-hello-world) — быстрый старт по созданию динамических приложений.
-* [Social Services Search Robot (SSSR)](#Приложение-social-services-search-robot) — пример создания приложения работающего с внешними API.
+* [Social Services Search Robot](#Приложение-social-services-search-robot) — пример создания приложения работающего с внешними API.
 
 После прочтения вы сможете разрабатывать собственные БЭМ-проекты, ориентированные на динамические данные.
 
@@ -316,14 +316,14 @@ static/
 
 ![Demo](start-with-bem-express__demo.png)
 
-SSSR — это сервис для поиска твитов и видео, отвечающих заданному набору параметров. Параметры поиска передаются в [Twitter Search API](https://dev.twitter.com/rest/public/search) и [YouTube Data API](https://developers.google.com/youtube/v3/docs/search/list) в виде HTTP-запроса методом GET.
+Social Services Search Robot (SSSR) — это приложение для поиска твитов и видео по поисковому запросу.
 
 Цель разработки данного приложения — показать:
 
 * как связать воедино данные и интерфейс;
 * какие [технологии](#Используемые-технологии) используются и за что отвечают.
 
-При разработке проекта используется:
+При разработке проекта используются:
 
 * фреймворк [i-bem.js](https://ru.bem.info/platform/i-bem/);
 * шаблонизатор [bem-xjst](https://ru.bem.info/platform/bem-xjst/);

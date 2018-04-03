@@ -683,22 +683,22 @@ static/
 
 1. Создайте поддиректорию **images**.
 
-  ```diff
-  bem-project/
-      static/
-  +       images/
-  +          favicon.ico
-  ```
+   ```diff
+   bem-project/
+       static/
+   +       images/
+   +          favicon.ico
+   ```
 
-2. Перенесите фавиконку в поддиректорию `**images**.
+2. Перенесите фавиконку в поддиректорию **images**.
 
-  ```diff
-  bem-project/
-      static/
-          images/
-  +          favicon.ico
-  -       favicon.ico
-  ```
+   ```diff
+   bem-project/
+       static/
+           images/
+   +          favicon.ico
+   -       favicon.ico
+   ```
 
 **Директория `static`**
 

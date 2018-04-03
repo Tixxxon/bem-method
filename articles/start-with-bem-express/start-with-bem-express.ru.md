@@ -168,14 +168,14 @@
         // Получаем данные из глобального объекта `this`
         var data = this.data;
         // Возвращаем полученные данные: `data.hello: 'Hello'`, `data.world: 'World'`
-        return data.hello + ', ' + data.world;
+        return data.hello + ', ' + data.world + '!';
     });
     ```
 
     После сохранения сервер автоматически перезапустится и контент страницы изменится на:
 
     ```text
-    Hello, World
+    Hello, World!
     footer content
     ```
 

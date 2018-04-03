@@ -685,6 +685,7 @@ static/
 
    ```diff
    bem-project/
+       ...
        static/
    +       images/
    +          favicon.ico
@@ -694,6 +695,7 @@ static/
 
    ```diff
    bem-project/
+       ...
        static/
            images/
    +          favicon.ico

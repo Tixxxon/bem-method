@@ -33,7 +33,7 @@
 
 * [Node.js 4+](https://nodejs.org).
 * [Git](https://git-scm.com).
-* [Git Bash](https://git-for-windows.github.io) (пользователям операционной системы Windows).
+* [Git Bash](https://git-for-windows.github.io) (пользователям ОС Windows).
 
 ## Приложение Hello, World
 

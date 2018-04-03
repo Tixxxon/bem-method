@@ -703,18 +703,14 @@ static/
         controllers/
         helpers/
         middleware/
-   +    app.js
-   +    auth.js
+   +    app.js               # Модуль монтирования промежуточных модулей
+   +    auth.js              # Модуль аутентификации на YouTube
         config.js
         index.js
         rebuild.js
         render.js
-   +    routes.js
+   +    routes.js            # Модуль маршрутизации веб-запросов
    ```
-
-  * **app.js** — модуль монтирования промежуточных модулей (делает их доступными в приложении);
-  * `auth.js` — модуль аутентификации на YouTube;
-  * `routes.js` — модуль маршрутизации веб-запросов.
 
 * Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл `app.js`.
 

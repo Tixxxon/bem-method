@@ -161,7 +161,7 @@
 * данных и интерфейса.
 
 
-![Demo](start-with-bem-express__demo.png)
+![Demo](start-with-bem-express__demo.png###2)
 
 ### Схема работы приложения
 

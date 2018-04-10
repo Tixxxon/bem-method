@@ -160,14 +160,13 @@
 * [технологий БЭМ](#Используемые-технологии);
 * данных и интерфейса.
 
-
-![Demo](start-with-bem-express__demo.png###2)
+![Demo](start-with-bem-express__demo.png)
 
 ### Схема работы приложения
 
 Работу приложения можно представить следующей схемой:
 
-![Chart of Social Services Search Robot](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__chart.svg)
+![Chart of Social Services Search Robot](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__chart.svg##1)
 
 #### Шаг 1. Запрос
 

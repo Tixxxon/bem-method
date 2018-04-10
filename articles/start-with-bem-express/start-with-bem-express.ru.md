@@ -166,7 +166,7 @@
 
 Работу приложения можно представить следующей схемой:
 
-![Chart of Social Services Search Robot](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__chart.svg##1)
+![Chart of Social Services Search Robot](https://rawgit.com/bem-site/bem-method/godfreyd-start-with-bem-express/articles/start-with-bem-express/start-with-bem-express__chart.svg)
 
 #### Шаг 1. Запрос
 

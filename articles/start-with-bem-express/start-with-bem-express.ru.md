@@ -4,7 +4,6 @@
 * [Приложение Hello, World](#Приложение-hello-world)
 * [Приложение Social Services Search Robot](#Приложение-social-services-search-robot)
   * [Схема работы приложения](#Схема-работы-приложения)
-  * [Используемые обозначения](#Используемые-обозначения)
   * [Используемые технологии](#Используемые-технологии)
   * [Используемые модули Node](#Используемые-модули-node)
   * [Файловая структура проекта](#Файловая-структура-проекта)
@@ -187,16 +186,6 @@
 #### Шаг 5. Отправка результата пользователю
 
 Приложение возвращает HTML-страницу пользователю.
-
-## Используемые обозначения
-
-В документе приняты следующие условные обозначения:
-
-* ![folder](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__folder.svg) — директория;
-* ![file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__file.svg) — файл;
-* ![add folder](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__add-folder.svg) — создать директорию;
-* ![add file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__add-file.svg) — создать файл;
-* ![edit file](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__edit-file.svg) — отредактировать файл.
 
 ## Используемые технологии
 

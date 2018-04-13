@@ -474,7 +474,7 @@ Google предлагает приложениям возможность выд
 
 #### Работа с YouTube Data API
 
-[YouTube Data API](https://developers.google.com/youtube/v3/) позволяет найти видеоролики, опубликованные на сайте Youtube.com.
+[YouTube Data API](https://developers.google.com/youtube/v3/) позволяет искать видеоролики, опубликованные на сайте Youtube.com.
 
 Чтобы настроить приложение на взаимодействие с API:
 

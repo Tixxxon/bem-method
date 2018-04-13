@@ -214,7 +214,7 @@ exports.blocks = [
 ];  
 ```
 
-Как видно из примера, в файле `index.bemdecl.js` определен только блок `root`. При использовании технологии [DEPS](#deps), в декларации определяют БЭМ-сущность, с которой будет начинаться [сборка проекта](https://ru.bem.info/methodology/build/). Блок `root` следует рассматривать как центральную «точку входа» при работе над проектом. Все остальные БЭМ-сущности попадают в сборку по зависимостям.
+Как видно из примера, в файле `index.bemdecl.js` определен только блок `root`. При использовании технологии [DEPS](#deps), в декларации определяют блок, с которого начинается [сборка проекта](https://ru.bem.info/methodology/build/). Блок `root` следует рассматривать как центральную «точку входа» при работе над проектом. Все остальные БЭМ-сущности попадают в сборку по зависимостям.
 
 Пример сборки проекта по зависимостям:
 
@@ -350,26 +350,13 @@ bem-project/
 
 ![server-changes](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__server-changes.svg)
 
-1. В директории **server** создайте поддиректории для контроллеров, хелперов и модулей промежуточного звена.
+1. Создайте в директории **server** следующие поддиректории/файлы:
 
    ```diff
    server/
    +    controllers/         # Контроллеры
    +    helpers/             # Хелперы
    +    middleware/          # Модули промежуточного звена
-        config.js
-        index.js
-        rebuild.js
-        render.js
-   ```
-
-2. Создайте JS-файлы будущих модулей.
-
-   ```diff
-   server/
-        controllers/
-        helpers/
-        middleware/
    +    app.js               # Модуль монтирования промежуточных модулей
    +    auth.js              # Модуль аутентификации на YouTube
         config.js
@@ -378,14 +365,10 @@ bem-project/
         render.js
    +    routes.js            # Модуль маршрутизации запросов
    ```
-
-3. Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл **app.js**.
-
-4. Добавьте [следующий код](https://gist.github.com/godfreyd/f6de1c33a83dda708a0e3ba9312f0c78) в файл **routes.js**.
-
-5. Измените расширение файла **config.js** —> **config.json**.
-
-6. Замените содержимое файла **config.json** на следующее:
+2. Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл **app.js**.
+3. Добавьте [следующий код](https://gist.github.com/godfreyd/f6de1c33a83dda708a0e3ba9312f0c78) в файл **routes.js**.
+4. Измените расширение файла **config.js** —> **config.json**.
+5. Замените содержимое файла **config.json** на следующее:
 
    ```json
    {
@@ -395,8 +378,8 @@ bem-project/
        "sessionSecret": "REPLACE_ME_WITH_RANDOM_STRING"
    }
    ```
-
-7. Замените содержимое файла **index.js** на [следующее](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
+   
+6. Замените содержимое файла **index.js** на [следующее](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
 
   > **Примечание.** В `index.js` остается только функциональность, отвечающая за запуск приложения и прослушивание запросов на порте.
 

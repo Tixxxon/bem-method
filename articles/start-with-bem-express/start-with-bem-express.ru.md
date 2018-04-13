@@ -461,8 +461,8 @@ Google предлагает приложениям возможность выд
 
 Чтобы настроить приложение на взаимодействие с API:
 
-1. Измените весь текущий контент файла **controllers/index.js** на [следующий](https://gist.github.com/godfreyd/3420597de46509b02c69707d596c8dc4).
-2. Добавьте в файл **helpers/index.js** следующий контент:
+1. Откройте файл **controllers/index.js** и замените его содержимое на [следующее](https://gist.github.com/godfreyd/3420597de46509b02c69707d596c8dc4).
+2. Добавьте следующий код в файл **helpers/index.js**:
 
    ```js
    module.exports = {

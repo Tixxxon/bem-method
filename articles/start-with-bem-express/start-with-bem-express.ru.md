@@ -481,7 +481,7 @@ Google предлагает приложениям возможность выд
 1. Добавьте [следующий код](https://gist.github.com/godfreyd/68af82df0bc171da54971990f442dddb) в файл **server/auth.js**.
 2. Отредактируйте файл `routes.js`.
 
-   ```js
+   ```diff
    var router = require('express').Router(),
        controllers = require('./controllers'),
    +   passportYouTube = require('./auth'),

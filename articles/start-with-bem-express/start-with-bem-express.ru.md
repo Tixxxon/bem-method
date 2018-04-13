@@ -593,7 +593,7 @@ Google предлагает приложениям возможность выд
 8. Выберите опцию `x-www-form-urlencoded`.
 9. Введите в поле **Key** тело запроса `grant_type` со значением `client_credentials`.
 10. Нажмите кнопку **Send**. OAuth-сервер вернет токен в JSON-формате:
-
+   
    ```json
    {
        "token_type": "bearer",

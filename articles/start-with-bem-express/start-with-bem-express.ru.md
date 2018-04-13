@@ -420,7 +420,7 @@ Google предлагает приложениям возможность выд
 
 > **Важно!** Сохраните полученные ключи (Client ID и Client Secret). Они необходимы для [конфигурационного файла](#Конфигурация-приложения) приложения.
 
-### Конфигурация приложения
+#### Конфигурация приложения
 
 После того как все ключи и токены получены, их необходимо добавить в конфигурационный файл приложения.
 
@@ -446,7 +446,7 @@ Google предлагает приложениям возможность выд
    +    }
    };
    ```
-   
+
 2. Заполните одноименные поля полученными ключами и токенами.
 3. Скройте файл **server/config.json** от системы контроля версий Git, чтобы случайно не отправить личные ключи в репозиторий.
 
@@ -455,44 +455,22 @@ Google предлагает приложениям возможность выд
    server/config.js
    ```
 
-### Работа с Twitter Search API
+#### Работа с Twitter Search API
 
-[Twitter Search API](https://dev.twitter.com/rest/public/search) позволяет найти последние или популярные твиты, опубликованные на сайте Twitter.com за последние 7 дней.
+[Twitter Search API](https://dev.twitter.com/rest/public/search) позволяет найти твиты, опубликованные за последние 7 дней.
 
-Подробнее:
+Чтобы настроить приложение для работы с API:
 
-* [Доступ к API](#Доступ-к-api)
-* [Вызов API](#Вызов-api)
+1. Измените весь текущий контент файла **controllers/index.js** на [следующий](https://gist.github.com/godfreyd/3420597de46509b02c69707d596c8dc4).
+2. Добавьте в файл **helpers/index.js** следующий контент:
 
-#### Доступ к API
+   ```js
+   module.exports = {
+       twitter: require('./twitter')
+   };
+   ```
 
-Для успешного вызова API необходимы:
-
-* URL, составленный согласно требованиям к нужному запросу.
-* [OAuth-токен](#Получение-oauth-токена-для-twitter), выданный вашему приложению для доступа к API.
-* Модуль [twitter](#twitter).
-
-#### Вызов API
-
-Изменения для работы с Twitter Search API:
-
-![twitter-changes](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__twitter-changes.svg)
-
-**Директория `controllers`**
-
-* Измените весь текущий контент файла `index.js` на [следующий](https://gist.github.com/godfreyd/3420597de46509b02c69707d596c8dc4).
-
-**Директория `helpers`**
-
-* Добавьте в файл `index.js` следующий контент:
-
-  ```js
-  module.exports = {
-      twitter: require('./twitter')
-  };
-  ```
-
-* Добавьте [следующий код](https://gist.github.com/godfreyd/e48b6831d785e51ee6ce0892151e3395) в файл `twitter.js`.
+3. Добавьте [следующий код](https://gist.github.com/godfreyd/e48b6831d785e51ee6ce0892151e3395) в файл **helpers/twitter.js**.
 
 ### Работа с YouTube Data API
 

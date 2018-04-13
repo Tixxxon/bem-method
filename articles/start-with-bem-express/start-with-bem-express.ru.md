@@ -5,7 +5,6 @@
 * [Приложение Social Services Search Robot](#Приложение-social-services-search-robot)
   * [Схема работы приложения](#Схема-работы-приложения)
   * [Используемые технологии](#Используемые-технологии)
-  * [Используемые модули Node](#Используемые-модули-node)
   * [Файловая структура проекта](#Файловая-структура-проекта)
   * [Создание приложения](#Создание-приложения)
 
@@ -292,23 +291,6 @@ JavaScript-код описывается в файлах с расширение
 
 > Подробнее о [технологии i-bem.js](https://ru.bem.info/platform/i-bem/).
 
-### Используемые модули Node
-
-Для работы приложения потребуется установить следующие модули:
-
-* [express](http://expressjs.com) — предоставляет функциональность для построения веб-приложения.
-* [passport](http://passportjs.org) — предоставляет стратегии аутентификации в приложениях на Node.js.
-* [passport-youtube-v3](https://www.npmjs.com/package/passport-youtube-v3) — предоставляет стратегию аутентификации на Youtube посредством аккаунта Youtube и токенов [OAuth 2.0](https://oauth.net/2/).
-* [twitter](https://www.npmjs.com/package/twitter) — клиентская библиотека для работы с [Twitter REST API](https://dev.twitter.com/rest/public).
-* [googleapis](http://google.github.io/google-api-nodejs-client/) — клиентская библиотека для работы с [Google REST API](https://developers.google.com/apis-explorer/#p/).
-* [moment](http://momentjs.com) — JavaScript библиотека для синтаксического анализа, валидации и форматирования дат.
-
-Установить модули можно командой:
-
-```bash
-$ npm install express passport passport-youtube-v3 twitter googleapis moment --save
-```
-
 ### Файловая структура проекта
 
 Имеет следующий вид:
@@ -337,11 +319,12 @@ bem-project/
 ### Создание приложения
 
 1. [Изменение файловой структуры проекта](Изменение-файловой-структуры-проекта)
-2. [Получение OAuth-токенов](#Получение-oauth-токенов)
-3. [Конфигурация приложения](#Конфигурация-приложения)
-4. [Работа с Twitter Search API](#Работа-с-twitter-search-api)
-5. [Работа с YouTube Data API](#Работа-с-youtube-data-api)
-6. [Верстка](#Верстка)
+2. [Установка дополнительных модулей](#Установка-дополнительных-модулей)
+3. [Получение OAuth-токенов](#Получение-oauth-токенов)
+4. [Конфигурация приложения](#Конфигурация-приложения)
+5. [Работа с Twitter Search API](#Работа-с-twitter-search-api)
+6. [Работа с YouTube Data API](#Работа-с-youtube-data-api)
+7. [Верстка](#Верстка)
 
 #### Изменение файловой структуры проекта
 
@@ -352,8 +335,13 @@ bem-project/
    ```diff
    server/
    +    controllers/         # Контроллеры
+   +        index.js         # Контроллер обработки запросов и рендеринга HTML
    +    helpers/             # Хелперы
+   +        index.js         # Входная точка для хелперов
+   +        twitter.js       # Модуль-хелпер для работы с Twitter Search API
+   +        youtube.js       # Модуль-хелпер для работы с YouTube Data API
    +    middleware/          # Модули промежуточного звена
+   +        auth.js          # Модуль проверки прохождения аутентификации на YouTube
    +    app.js               # Модуль монтирования промежуточных модулей
    +    auth.js              # Модуль аутентификации на YouTube
         config.js
@@ -362,10 +350,12 @@ bem-project/
         render.js
    +    routes.js            # Модуль маршрутизации запросов
    ```
-2. Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл **app.js**.
-3. Добавьте [следующий код](https://gist.github.com/godfreyd/f6de1c33a83dda708a0e3ba9312f0c78) в файл **routes.js**.
-4. Измените расширение файла **config.js** —> **config.json**.
-5. Замените содержимое файла **config.json** на следующее:
+
+2. Добавьте [следующий код](https://gist.github.com/godfreyd/4bda7da3db029890378e15bcc38f32de) в файл **controllers/index.js**.
+3. Добавьте [следующий код](https://gist.github.com/godfreyd/a584cee1191833afae70fc059ba1f200) в файл **app.js**.
+4. Добавьте [следующий код](https://gist.github.com/godfreyd/f6de1c33a83dda708a0e3ba9312f0c78) в файл **routes.js**.
+5. Измените расширение файла **config.js** —> **config.json**.
+6. Замените содержимое файла **config.json** на следующее:
 
    ```json
    {
@@ -376,31 +366,9 @@ bem-project/
    }
    ```
 
-6. Замените содержимое файла **index.js** на [следующее](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
+7. Замените содержимое файла **index.js** на [следующее](https://gist.github.com/godfreyd/37d903c73f863619e2e1be1cd946d4c3).
 
-  > **Примечание.** В `index.js` остается только функциональность, отвечающая за запуск приложения и прослушивание запросов на порте.
-
-**Директория `controllers`**
-
-* Создайте пустой `JS`-файл:
-
-  * `index.js` — контроллер обработки запросов и рендеринга HTML.
-
-* Добавьте [следующий код](https://gist.github.com/godfreyd/4bda7da3db029890378e15bcc38f32de) в файл `index.js`.
-
-**Директория `helpers`**
-
-* Создайте пустые `JS`-файлы:
-
-  * `index.js` — входная точка для хелперов;
-  * `twitter.js` — модуль-хелпер для работы с Twitter Search API;
-  * `youtube.js` — модуль-хелпер для работы с YouTube Data API.
-
-**Директория `middleware`**
-
-* Создайте пустой `JS`-файл:
-
-  * `auth.js` — модуль проверки прохождения аутентификации на YouTube.
+   > **Примечание.** В `index.js` остается только функциональность, отвечающая за запуск приложения и прослушивание запросов на порте.
 
 В результате выполненных действий файловая структура директории `server` должна иметь следующий вид:
 
@@ -422,6 +390,27 @@ server/
     render.js             # Рендеринг HTML
     routes.js             # Маршрутизатор
 ```
+
+### Установка дополнительных модулей
+
+Для работы приложения потребуется установить следующие модули:
+
+* [express](http://expressjs.com) — предоставляет функциональность для построения веб-приложения.
+* [passport](http://passportjs.org) — предоставляет стратегии аутентификации в приложениях на Node.js.
+* [passport-youtube-v3](https://www.npmjs.com/package/passport-youtube-v3) — предоставляет стратегию аутентификации на Youtube посредством аккаунта Youtube и токенов [OAuth 2.0](https://oauth.net/2/).
+* [twitter](https://www.npmjs.com/package/twitter) — клиентская библиотека для работы с [Twitter REST API](https://dev.twitter.com/rest/public).
+* [googleapis](http://google.github.io/google-api-nodejs-client/) — клиентская библиотека для работы с [Google REST API](https://developers.google.com/apis-explorer/#p/).
+* [moment](http://momentjs.com) — JavaScript библиотека для синтаксического анализа, валидации и форматирования дат.
+
+Установить модули можно командой:
+
+```bash
+$ npm install express passport passport-youtube-v3 twitter googleapis moment --save
+```
+
+
+
+
 
 ### Получение OAuth-токенов
 

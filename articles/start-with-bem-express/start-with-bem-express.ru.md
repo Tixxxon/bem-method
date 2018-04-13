@@ -89,7 +89,7 @@
 
     * Cервер — отвечает за обработку динамических данных.
     * [Nodemon](https://github.com/remy/nodemon/) — следит за изменениями на [файловой структуре](https://ru.bem.info/methodology/filestructure/) и перезапускает сервер.
-    * [Chokidar](https://github.com/paulmillr/chokidar) — следит за изменениями в файлах директорий `*.blocks/` и перестраивает структуру проекта.
+    * [Chokidar](https://github.com/paulmillr/chokidar) — следит за изменениями в файлах директорий **\*.blocks/** и перестраивает структуру проекта.
     * [Livereload](https://github.com/napcs/node-livereload) — обновляет страницу в браузере.
 
 7. Откройте браузер и введите адрес [localhost:3000](http://localhost:3000).
@@ -479,7 +479,7 @@ Google предлагает приложениям возможность выд
 Чтобы настроить приложение на взаимодействие с API:
 
 1. Добавьте [следующий код](https://gist.github.com/godfreyd/68af82df0bc171da54971990f442dddb) в файл **server/auth.js**.
-2. Отредактируйте файл `routes.js`.
+2. Отредактируйте файл **server/routes.js**.
 
    ```diff
    var router = require('express').Router(),

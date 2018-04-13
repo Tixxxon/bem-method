@@ -479,7 +479,7 @@ Google предлагает приложениям возможность выд
 Чтобы настроить приложение на взаимодействие с API:
 
 1. Добавьте [следующий код](https://gist.github.com/godfreyd/68af82df0bc171da54971990f442dddb) в файл **server/auth.js**.
-2. Отредактируйте файл **server/routes.js**.
+2. Отредактируйте файл **server/routes.js**:
 
    ```diff
    var router = require('express').Router(),
@@ -503,8 +503,8 @@ Google предлагает приложениям возможность выд
        module.exports = router;
    ```
 
-3. Измените весь текущий контент файла **controllers/index.js** на [следующий](https://gist.github.com/godfreyd/60d5d123c45c067b3fb675688dc74835).
-4. Внесите в файл **helpers/index.js** следующие изменения:
+3. Замените содержимое файла **controllers/index.js** на [следующее](https://gist.github.com/godfreyd/60d5d123c45c067b3fb675688dc74835).
+4. Отредактируйте файл **helpers/index.js**:
 
    ```diff
    module.exports = {
@@ -514,7 +514,7 @@ Google предлагает приложениям возможность выд
    ```
 
 5. Добавьте [следующий код](https://gist.github.com/godfreyd/e103013e1fe480965cd84b3e7040d04b) в файл **helpers/youtube.js**.
-6. Добавьте в файл **middleware/auth.js** следующий контент:
+6. Добавьте следующий контент в файл **middleware/auth.js**:
 
    ```js
    module.exports = {

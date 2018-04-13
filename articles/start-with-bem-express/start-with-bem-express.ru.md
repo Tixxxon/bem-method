@@ -7,7 +7,7 @@
   * [Используемые обозначения](#Используемые-обозначения)
   * [Используемые технологии](#Используемые-технологии)
   * [Используемые модули Node](#Используемые-модули-node)
-  * [Изменение файловой структуры проекта](#Изменение-файловой-структуры-проекта)
+  * [Файловая структура проекта](#Файловая-структура-проекта)
   * [Получение OAuth-токенов](#Получение-oauth-токенов)
   * [Конфигурация приложения](#Конфигурация-приложения)
   * [Работа с Twitter Search API](#Работа-с-twitter-search-api)
@@ -158,7 +158,7 @@
 
 Цель разработки данного приложения — показать взаимосвязь:
 * [технологий БЭМ](#Используемые-технологии);
-* данных и интерфейса.
+* данных и интерфейса в БЭМ-проекте.
 
 ![Demo](start-with-bem-express__demo.png)
 
@@ -313,241 +313,24 @@ JavaScript-код описывается в файлах с расширение
 
 ### Используемые модули Node
 
-Давайте ближе познакомимся с концепцией модуля Node и рассмотрим основные из них, необходимые для работы приложения.
-
-> **Важно!** В разделе не рассматриваются все используемые модули. Подробно с необходимым модулем можно ознакомиться на сайте [npm](https://www.npmjs.com). Здесь можно найти каталог всех модулей Node с поддержкой поиска.
-
-Базовая реализация Node остается настолько простой, насколько это возможно. Вместо того, чтобы встраивать все возможные компоненты прямо в Node, разработчики предоставляют дополнительную функциональность в виде отдельных модулей (пакетов).
-
-Система модулей Node построена по образцу системы [CommonJS](https://en.wikipedia.org/wiki/CommonJS), механизма создания взаимодействующих модулей. Центральное место в системе занимает контракт, который должен выполняться разработчиками, чтобы их модули нормально взаимодействовали с другими.
-
-Все пакеты установленные с помощью менеджера пакетов npm находятся в директории `node_modules`.
-
-Подключение модулей происходит при помощи команды `require`. Если пакет установлен с использованием npm, указывать путь не нужно. Достаточно указать имя:
-
-```js
-var express = require('express');
-```
-
-При подключении собственного локального модуля, необходимо указать к нему путь:
-
-```js
-var someModule = require('./somefolder/somemodule');
-```
-
-Важной особенностью любого модуля является то, что он должен быть рассчитан на взаимодействие с Node. Для этого модуль нужно экспортировать с помощью `module.exports`:
-
-```js
-module.exports = {
-    // some module
-};
-```
-
 Для работы приложения потребуются следующие модули:
 
-* [express](#express)
-* [passport](#passport)
-* [passport-youtube-v3](#passport-youtube-v3)
-* [twitter](#twitter)
-* [googleapis](#googleapis)
-* [moment](#moment)
+* [express](http://expressjs.com) — предоставляет функциональность для построения веб-приложения.
+* [passport](http://passportjs.org) — предоставляет стратегии аутентификации в приложениях на Node.js.
+* [passport-youtube-v3](https://www.npmjs.com/package/passport-youtube-v3) — предоставляет стратегию аутентификации на Youtube посредством аккаунта Youtube и токенов [OAuth 2.0](https://oauth.net/2/).
+* [twitter](https://www.npmjs.com/package/twitter) — клиентская библиотека для работы с [Twitter REST API](https://dev.twitter.com/rest/public).
+* [googleapis](http://google.github.io/google-api-nodejs-client/) — клиентская библиотека для работы с [Google REST API](https://developers.google.com/apis-explorer/#p/).
+* [moment](http://momentjs.com) — JavaScript библиотека для синтаксического анализа, валидации и форматирования дат.
 
-> **Примечание.** Установить необходимые модули можно одной командой:
->
-> ```bash
-> npm install express passport passport-youtube-v3 twitter googleapis moment --save
-> ```
-
-#### express
-
-Предоставляет большую часть функциональности, необходимой разработчику для построения веб-приложения.
-
-Установка:
+Установить модули можно командой:
 
 ```bash
-npm install express --save
+$ npm install express passport passport-youtube-v3 twitter googleapis moment --save
 ```
 
-В документации Express представлено минимальное приложение «[Hello World Express](http://expressjs.com/en/starter/hello-world.html)». Оно демонстрирует основную последовательность действий:
+### Файловая структура проекта
 
-```js
-var express = require('express');
-var app = express();
-
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-});
-
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-});
-```
-
-#### passport
-
-Предоставляет [различные стратегии](http://passportjs.org) аутентификации в приложениях на Node.js.
-
-Установка:
-
-```bash
-npm install passport --save
-```
-
-Пример авторизации по протоколу OAuth 2.0:
-
-```js
-var passport = require('passport'),
-    OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
-
-/**
- * Функция монтирует необходимую стратегию авторизации
- * @function
- * @param {string} provider — Например, facebook, twitter, google, ...
- * @param {object} strategy — Стратегия авторизации
- */
-passport.use('provider', new OAuth2Strategy({
-    authorizationURL: 'https://www.provider.com/oauth2/authorize',
-    tokenURL: 'https://www.provider.com/oauth2/token',
-    clientID: SERVICE_APP_ID,
-    clientSecret: SERVICE_APP_SECRET,
-    callbackURL: 'https://www.example.com/auth/provider/callback'
-}));
-```
-
-> **Примечание.** [OAuth 2.0](https://oauth.net/2/) — открытый протокол авторизации, который позволяет предоставить третьей стороне ограниченный доступ к защищенным ресурсам пользователя без необходимости передавать ей (третьей стороне) логин и пароль.
-
-#### passport-youtube-v3
-
-Предоставляет механизм аутентификации на Youtube посредством аккаунта Youtube и токенов [OAuth 2.0](https://oauth.net/2/).
-
-Установка:
-
-```bash
-npm install passport-youtube-v3 --save
-```
-
-**Пример**
-
-```js
-var passport = require('passport'),
-    YoutubeV3Strategy = require('passport-youtube-v3').Strategy;
-/**
- * Функция монтирует стратегию YoutubeV3Strategy
- * @function
- * @param {object} strategy — Стратегия
- */
-passport.use(new YoutubeV3Strategy({
-    clientID: YOUTUBE_APP_ID,
-    clientSecret: YOUTUBE_APP_SECRET,
-    callbackURL: '/auth/youtube/callback',
-    scope: ['https://www.googleapis.com/auth/youtube.readonly']
-}, verify));
-```
-
-> Подробнее о [том как получить OAuth-токены](#Получение-oauth-токенов).
-
-#### twitter
-
-Клиентская [библиотека](https://www.npmjs.com/package/twitter) для работы с [Twitter REST API](https://dev.twitter.com/rest/public).
-
-Установка:
-
-```bash
-npm install twitter --save
-```
-
-**Пример**
-
-```js
-var Twitter = require('twitter');
-// Создаем экземпляр объекта Twitter
-var client = new Twitter({
-  consumer_key: '',
-  consumer_secret: '',
-  bearer_token: ''
-});
-
-var params = {q: 'bem'};
-/**
- * Функция поиска. Ищет твиты по заданным параметрам.
- * @function
- * @param {object} params - Параметры поиска.
- * @param {function} callback - Получает найденные твиты.
- */
-client.get('search/tweets', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  }
-});
-```
-
-#### googleapis
-
-Клиентская [библиотека](http://google.github.io/google-api-nodejs-client/) для работы с [Google REST API](https://developers.google.com/apis-explorer/#p/).
-
-Установка:
-
-```bash
-npm install googleapis --save
-```
-
-**Пример**
-
-```js
-var google = require('googleapis'),
-    OAuth2 = google.auth.OAuth2;
-// Создаем экземпляр объекта OAuth2
-var oauth2Client = new OAuth2(
-  YOUR_CLIENT_ID,
-  YOUR_CLIENT_SECRET,
-  YOUR_REDIRECT_URL
-);
-// Устанавливаем учетные данные для исходящих вызовов
-oauth2Client.setCredentials({
-  access_token: 'ACCESS TOKEN HERE',
-  refresh_token: 'REFRESH TOKEN HERE'
-});
-// Логинимся
-var youtube = google.youtube({
-    version: 'v3',
-    auth: this.oauth2Client
-});
-
-var params = {q: 'bem'};
-/**
- * Функция поиска. Ищет видео по заданным параметрам.
- * @function
- * @param {object} params - Параметры поиска.
- * @param {function} callback - Получает найденные видеоролики.
- */
-youtube.search.list(params, function(error, video, response) {
-  if (!error) {
-    console.log(video);
-  }
-});
-```
-
-#### moment
-
-JavaScript [библиотека](http://momentjs.com) для синтаксического анализа, валидации и форматирования дат.
-
-Установка:
-
-```bash
-npm install moment --save
-```
-
-**Пример**
-
-```js
-var moment = require('moment');
-
-moment().startOf('day').fromNow();             // 17 часов назад
-```
-
-### Изменение файловой структуры проекта
-
-Файловая структура приложения Hello, World имеет следующий вид:
+Имеет следующий вид:
 
 ```files
 bem-project/
@@ -570,77 +353,7 @@ bem-project/
     README.md             # Текстовое описание проекта
 ```
 
-Рассмотрим подробнее некоторые основные директории:
-
-* [.enb](#enb)
-* [common.blocks](#commonblocks)
-* [desktop.bundles](#desktopbundles)
-* [server](#server)
-* [static](#static)
-
-#### .enb
-
-Содержит конфигурацию сборщика [ENB](https://ru.bem.info/toolbox/enb/).
-
-Сборка решает следующие задачи:
-
-* Объединяет исходные файлы, разложенные по файловой структуре проекта.
-* Подключает в проект только необходимые блоки, элементы и модификаторы.
-* Учитывает порядок подключения.
-* Обрабатывает код исходных файлов в процессе сборки (например, преобразует LESS-код в CSS-код).
-
-Алгоритм сборки описывается в файле `.enb/make.js`.
-
-> Подробнее о [сборке БЭМ-проектов](https://ru.bem.info/methodology/build/).
-
-#### common.blocks
-
-Содержит реализации всех [БЭМ-сущностей](https://ru.bem.info/methodology/key-concepts/#БЭМ-сущность) проекта.
-
-Имена файлов и директорий должны соответствовать используемому на проекте [соглашению по именованию](https://ru.bem.info/methodology/naming-convention/).
-
-Код разделяется на независимые части для удобства работы с отдельными блоками.
-
-```files
-common.blocks/
-    body/                 # Директория блока `body`
-    footer/               # Директория блока `footer`
-    header/               # Директория блока `header`
-    page/                 # Директория блока `page`
-        _view/            # Поддиректория модификатора `page_view`
-        page.bemtree.js   # Реализация блока `page` в технологии BEMTREE  
-        page.deps.js      # Реализация блока `page` в технологии DEPS
-    page-index/           # Директория блока `page-index`
-    root/                 # Директория блока `root`
-```
-
-Перед отправкой в браузер файлы [собираются](#enb) и оптимизируются.
-
-#### desktop.bundles
-
-Содержит файлы полученные в результате сборки. Такие файлы в БЭМ-методологии называются [бандлами](https://ru.bem.info/methodology/build/).
-
-Одной директории бандла соответствует одна страница проекта:
-
-```files
-desktop.bundles/
-    index/                # Бандлы для страницы `index`
-        index.bemdecl.js  # Декларация для страницы `index`
-        index.bemhtml.js  # Бандл страницы `index` в технологии реализации BEMHTML
-        index.bemtree.js  # Бандл страницы `index` в технологии реализации BEMTREE
-        index.css         # Бандл страницы `index` в технологии реализации CSS
-        index.deps.js     # Бандл страницы `index` в технологии реализации DEPS
-        index.js          # Бандл страницы `index` в технологии реализации JS
-        ...
-```
-
-> **Примечание.** Единственным не автоматически сгенерированным файлом в директории `index` является файл `index.bemdecl.js`. Подробнее технология BEMDECL [рассматривается ниже](#bemdecl).
-
-#### server
-
-Содержит модули Node, которые прослушивают веб-запросы и генерируют страницу.
-
-Файловая структрура директории:
+Директория `server` содержит модули Node, которые прослушивают веб-запросы и генерируют страницу.
 
 ```files
 server/
@@ -657,18 +370,6 @@ server/
 * `rebuild.js` — модуль автоматической пересборки проекта. Следит за изменениями в файлах и директориях (директории: `*.blocks` и `static`), пересобирает и перезапускает проект.
 * `render.js` — модуль рендеринга HTML. Получает на вход BEMJSON, достраивает его необходимыми данными и генерирует HTML.
 
-#### static
-
-Содержит статические файлы, предназначенные для внешнего доступа:
-
-```files
-static/
-    favicon.ico           # Фавиконка
-    index.min.css         # Символическая ссылка на `desktop.bundles/index/index.min.css`
-    index.min.js          # Символическая ссылка на `desktop.bundles/index/index.min.js`
-```
-
-> Подробнее о [символических ссылках](https://ru.wikipedia.org/wiki/Символическая_ссылка).
 
 Прежде чем начать писать код, необходимо изменить структуру взятого за основу приложения Hello, World.
 

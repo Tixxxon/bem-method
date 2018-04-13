@@ -525,15 +525,15 @@ Google предлагает приложениям возможность выд
    };
    ```
 
-### Верстка
+#### Верстка
 
 В данном документе первоочередное внимание уделено вопросу взаимодействия [технологий БЭМ](https://ru.bem.info/platform/). Поэтому он не содержит описания верстки и клиентского JavaScript. Описание верстки привело бы к большему объему, а, значит, и к меньшей практической ценности документа.
 
 Процесс верстки сведен к следующим шагам:
 
-1. Удалите все блоки из директории `common.blocks`.
-2. Склонируйте [следующие блоки](https://github.com/godfreyd/bem-in-dynamic/tree/master/common.blocks) в директорию `common.blocks`.
-3. Добавьте [logo.svg](https://github.com/godfreyd/bem-in-dynamic/blob/master/static/images/logo.svg) в директорию `static/images`.
+1. Удалите все блоки из директории **common.blocks**.
+2. Склонируйте [следующие блоки](https://github.com/godfreyd/bem-in-dynamic/tree/master/common.blocks) в директорию **common.blocks**.
+3. Добавьте [logo.svg](https://github.com/godfreyd/bem-in-dynamic/blob/master/static/images/logo.svg) в директорию **static**.
 4. Перезапустите сервер: `npm run dev`.
 
 Приложение Social Services Search Robot готово.

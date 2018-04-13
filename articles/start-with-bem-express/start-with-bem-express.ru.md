@@ -459,7 +459,7 @@ Google предлагает приложениям возможность выд
 
 [Twitter Search API](https://dev.twitter.com/rest/public/search) позволяет найти твиты, опубликованные за последние 7 дней.
 
-Чтобы настроить приложение для работы с API:
+Чтобы настроить приложение на взаимодействие с API:
 
 1. Измените весь текущий контент файла **controllers/index.js** на [следующий](https://gist.github.com/godfreyd/3420597de46509b02c69707d596c8dc4).
 2. Добавьте в файл **helpers/index.js** следующий контент:
@@ -472,68 +472,36 @@ Google предлагает приложениям возможность выд
 
 3. Добавьте [следующий код](https://gist.github.com/godfreyd/e48b6831d785e51ee6ce0892151e3395) в файл **helpers/twitter.js**.
 
-### Работа с YouTube Data API
+#### Работа с YouTube Data API
 
-[YouTube Data API](https://developers.google.com/youtube/v3/) позволяет найти видеоролики, опубликованные на сайте Youtube.com. По умолчанию в набор результата поиска включены следующие ресурсы: видео, каналы, списки воспроизведения.
+[YouTube Data API](https://developers.google.com/youtube/v3/) позволяет найти видеоролики, опубликованные на сайте Youtube.com.
 
-Подробнее:
+Чтобы настроить приложение на взаимодействие с API:
 
-* [Доступ к API](#Доступ-к-api-1)
-* [Вызов API](#Вызов-api-1)
+1. Добавьте [следующий код](https://gist.github.com/godfreyd/68af82df0bc171da54971990f442dddb) в файл **server/auth.js**.
+2. Отредактируйте файл `routes.js`.
 
-#### Доступ к API
+   ```js
+   var router = require('express').Router(),
+       controllers = require('./controllers'),
+   +   passportYouTube = require('./auth'),
+   +   middleware = require('./middleware/auth'),
+   +   isAuthenticated = middleware.isAuthenticated;
 
-Для успешного вызова API необходимы:
+       router
+   -       .get('/ping/', function(req, res) {
+   -           res.send('ok');
+   -       })
+   -       .get('/', controllers.getContent);
+   +       .get('/auth/youtube', passportYouTube.authenticate('youtube'))
+   +       .get('/auth/youtube/callback', passportYouTube.authenticate('youtube',
+   +           {failureRedirect: '/error', failureFlash: true }), (req, res) => {
+   +               res.redirect('/');
+   +           })
+   +       .get('/', isAuthenticated, controllers.getContent);
 
-* URL, составленный согласно требованиям к нужному запросу.
-* [OAuth-токен](#Получение-oauth-токена-для-google), выданный вашему приложению для доступа к API.
-* Модуль [googleapis](#googleapis).
-
-#### Вызов API
-
-Изменения для работы с YouTube Data API:
-
-![youtube-changes](https://cdn.rawgit.com/bem-site/bem-method/bem-info-data/articles/start-with-bem-express/start-with-bem-express__youtube-changes.svg)
-
-**Директория `server`**
-
-* Добавьте [следующий код](https://gist.github.com/godfreyd/68af82df0bc171da54971990f442dddb) в файл `auth.js`.
-
-* Отредактируйте файл `routes.js`.
-
-  Измените:
-
-  ```js
-  var router = require('express').Router(),
-      controllers = require('./controllers');
-
-  router
-      .get('/ping/', function(req, res) {
-          res.send('ok');
-      })
-      .get('/', controllers.getContent);
-
-  module.exports = router;
-  ```
-
-  На:
-
-  ```js
-  var router = require('express').Router(),
-      controllers = require('./controllers'),
-      passportYouTube = require('./auth'),
-      middleware = require('./middleware/auth'),
-      isAuthenticated = middleware.isAuthenticated;
-
-  router
-      .get('/auth/youtube', passportYouTube.authenticate('youtube'))
-      .get('/auth/youtube/callback', passportYouTube.authenticate('youtube', { failureRedirect: '/error', failureFlash: true }), (req, res) => {
-          res.redirect('/');
-      })
-      .get('/', isAuthenticated, controllers.getContent);
-
-  module.exports = router;
-  ```
+       module.exports = router;
+   ```
 
 **Директория `controllers`**
 

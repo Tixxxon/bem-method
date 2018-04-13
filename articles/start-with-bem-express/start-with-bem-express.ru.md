@@ -183,7 +183,7 @@
 
 Приложение возвращает HTML-страницу пользователю.
 
-## Используемые технологии БЭМ
+### Используемые технологии БЭМ
 
 В работе будем использовать следующие технологии:
 
@@ -193,7 +193,7 @@
 * [BEMHTML](#bemhtml) — шаблонизатор преобразующий BEMJSON в HTML.
 * [i-bem.js](#i-bemjs) — JavaScript-фреймворк для БЭМ.
 
-### BEMDECL
+#### BEMDECL
 
 Определяет список [БЭМ-сущностей](https://ru.bem.info/methodology/key-concepts/#БЭМ-сущность), используемых на странице.
 
@@ -236,7 +236,7 @@ root(DECL)
 
 > Подробнее о [технологии BEMDECL](https://ru.bem.info/methodology/declarations/).
 
-### DEPS
+#### DEPS
 
 Определяет зависимости между БЭМ-сущностями, которые разнесены по файловой структуре проекта и не отражены в [декларации](#bemdecl).
 
@@ -253,7 +253,7 @@ root(DECL)
 
 > Подробнее о [технологии DEPS](https://ru.bem.info/platform/deps/).
 
-### BEMTREE
+#### BEMTREE
 
 Является частью шаблонизатора [bem-xjst](https://ru.bem.info/platform/bem-xjst/) и преобразует данные в BEMJSON.
 
@@ -265,7 +265,7 @@ root(DECL)
 
 > Подробнее о [технологии BEMTREE](https://ru.bem.info/platform/bem-xjst/).
 
-### BEMHTML
+#### BEMHTML
 
 Является частью шаблонизатора [bem-xjst](https://ru.bem.info/platform/bem-xjst/) и преобразует BEMJSON-описание страницы в HTML.
 
@@ -277,7 +277,7 @@ root(DECL)
 
 > Подробнее о [технологии BEMHTML](https://ru.bem.info/platform/bem-xjst/).
 
-### i-bem.js
+#### i-bem.js
 
 Клиентский JavaScript-фреймворк для веб-разработки в рамках БЭМ-методологии.
 

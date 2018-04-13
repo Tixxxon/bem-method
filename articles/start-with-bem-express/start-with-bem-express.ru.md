@@ -503,36 +503,27 @@ Google предлагает приложениям возможность выд
        module.exports = router;
    ```
 
-**Директория `controllers`**
+3. Измените весь текущий контент файла **controllers/index.js** на [следующий](https://gist.github.com/godfreyd/60d5d123c45c067b3fb675688dc74835).
+4. Внесите в файл **helpers/index.js** следующие изменения:
 
-* Измените весь текущий контент файла `index.js` на [следующий](https://gist.github.com/godfreyd/60d5d123c45c067b3fb675688dc74835).
+   ```diff
+   module.exports = {
+       twitter: require('./twitter'),
+   +   youtube: require('./youtube')
+   };
+   ```
 
-**Директория `helpers`**
+5. Добавьте [следующий код](https://gist.github.com/godfreyd/e103013e1fe480965cd84b3e7040d04b) в файл **helpers/youtube.js**.
+6. Добавьте в файл **middleware/auth.js** следующий контент:
 
-* Добавьте в файл `index.js` следующий контент (см. комментарий):
-
-  ```js
-  module.exports = {
-      twitter: require('./twitter'),
-      youtube: require('./youtube')        // Подключаем модуль `youtube.js`
-  };
-  ```
-
-* Добавьте [следующий код](https://gist.github.com/godfreyd/e103013e1fe480965cd84b3e7040d04b) в файл `youtube.js`.
-
-**Директория `middleware`**
-
-* Добавьте в файл `auth.js` следующий контент:
-
-  ```js
-  module.exports = {
-      isAuthenticated: function(req, res, next) {
-          if (req.isAuthenticated()) return next();
-
-          return res.redirect('/auth/youtube');
-      }
-  };
-  ```
+   ```js
+   module.exports = {
+       isAuthenticated: function(req, res, next) {
+           if (req.isAuthenticated()) return next();
+           return res.redirect('/auth/youtube');
+       }
+   };
+   ```
 
 ### Верстка
 
